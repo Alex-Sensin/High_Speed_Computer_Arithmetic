@@ -1,0 +1,41 @@
+module stimulus();
+    logic A;
+    logic B;
+    logic S;
+    logic Cout;
+
+    integer handle;
+    integer desc;
+
+    halfAdder dut(.A(A), .B(B), .S(S), .Cout(Cout));
+    
+    initial begin
+        handle =$fopen("test.out");
+
+    end
+
+    always begin
+        desc = handle;
+        #5 $fdisplay(desc, "S: %b\nCout: %b", S, Cout);
+    end
+
+    initial begin
+        #5 A = 1'b0;
+        #0 B = 1'b0;
+    end
+
+    initial begin
+        #10 A = 1'b0;
+        #0 B = 1'b1;
+    end
+
+    initial begin
+        #15 A = 1'b1;
+        #0 B = 1'b0;
+    end
+
+    initial begin
+        #20 A = 1'b1;
+        #0 B = 1'b1;
+    end
+endmodule
